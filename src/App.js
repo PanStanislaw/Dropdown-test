@@ -1,23 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
+import DropDown from "./DropDown";
+
+const items = [
+{
+  id:1 ,
+  name: 'English',
+},
+{
+  id:2 ,
+  name: 'Русский',
+},
+{
+  id:3 ,
+  name: 'Deutsche',
+},
+{
+  id:4 ,
+  name: 'Italiano',
+},
+{
+  id:5 ,
+  name: '日本語',
+},
+]
+
+const names = [
+  {
+    id:1 ,
+    name: 'Stive',
+  },
+  {
+    id:2 ,
+    name: 'Sven',
+  },
+  {
+    id:3 ,
+    name: 'Den',
+  },
+  {
+    id:4 ,
+    name: 'Jon',
+  },
+  {
+    id:5 ,
+    name: 'Finn',
+  },
+  ]
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <DropDown items={items} title="Country" multiSelect={true}/>
+       <DropDown items={names} title="Name" multiSelect={false}/>
+       <DropDown items={items} title="Country" multiSelect={true}/>
+       <DropDown items={names} title="Name" multiSelect={false}/>
     </div>
   );
 }
