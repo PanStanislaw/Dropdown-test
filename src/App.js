@@ -2,24 +2,24 @@ import DropDown from "./DropDown";
 
 const items = [
 {
-  id:1 ,
-  name: 'English',
+  id:"a",
+  name: 'English fdfsd',
 },
 {
-  id:2 ,
-  name: 'Русский',
+  id:"b" ,
+  name: 'Русский fdsf ',
 },
 {
   id:3 ,
-  name: 'Deutsche',
+  name: 'Deutsche fsd f',
 },
 {
   id:4 ,
-  name: 'Italiano',
+  name: 'Italianof  fs',
 },
 {
   id:5 ,
-  name: '日本語',
+  name: '日本語f 2',
 },
 ]
 
@@ -50,7 +50,7 @@ const names = [
 function App() {
   return (
     <div className="App">
-      <DropDown items={items} title="Country" multiSelect={true}/>
+       <DropDown items={items} title="Country" multiSelect={true}/>
        <DropDown items={names} title="Name" multiSelect={false}/>
        <DropDown items={items} title="Country" multiSelect={true}/>
        <DropDown items={names} title="Name" multiSelect={false}/>
