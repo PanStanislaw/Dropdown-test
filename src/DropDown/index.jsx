@@ -11,12 +11,13 @@ const DropDown = React.memo(function DropDown({ items, title, multiSelect }) {
   const handleClickClose = (e) => {
     if (!e.path.includes(dropDownRef.current)) {
       setOpen('');
+      document.body.removeEventListener('click', handleClickClose);
     }
   };
 
   React.useEffect(() => {
     document.body.addEventListener('click', handleClickClose);
-  }, []);
+  }, [open]);
 
   const onSelectCheck = (e) => {
     const name = e.target.name;
