@@ -1,32 +1,33 @@
 import React from 'react';
 import './DropDown.scss';
 
-const DropDown = React.memo(function DropDown({ items, title, multiSelect }) {
-  const [open, setOpen] = React.useState('');
-  const [select, setSelect] = React.useState([]);
-  const [drop, setDrop] = React.useState('');
-  const dropDownRef = React.useRef();
-  const toggle = () => setOpen(!open);
+export interface Props {
+  items: [];
+  title: string;
+  multiSelect: boolean;
+  status: string;
+  onTitleClick: any;
+  children: React.ReactNode;
+}
 
-  const handleClickClose = (e) => {
-    if (!e.path.includes(dropDownRef.current)) {
-      setOpen('');
-      document.body.removeEventListener('click', handleClickClose);
-    }
-  };
+const DropDown = React.memo(function DropDown({
+  items,
+  title,
+  multiSelect,
+  status,
+  onTitleClick,
+}: Props) {
+  const [select, setSelect] = React.useState<string[]>([]);
 
-  React.useEffect(() => {
-    document.body.addEventListener('click', handleClickClose);
-  }, [open]);
-
-  const onSelectCheck = (e) => {
-    const name = e.target.name;
+  const onSelectCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const name: string = e.target.name;
     setSelect([]);
     setSelect([name]);
   };
 
-  const onChangeCheck = (e) => {
+  const onChangeCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
+    console.log(name);
     if (select.find((el) => el === name) !== name) {
       setSelect([...select, name]);
     } else {
@@ -34,22 +35,22 @@ const DropDown = React.memo(function DropDown({ items, title, multiSelect }) {
     }
   };
 
-  const onCloseSelectItem = (e) => {
+  const onCloseSelectItem = (e: any) => {
     return setSelect(select.filter((el) => el !== e.target.name));
   };
 
   return (
     <div className="container">
-      <div ref={dropDownRef} className={`wrapper ${title}`}>
-        <div className="drop__header" onClick={toggle}>
+      <div className={`wrapper ${title}`}>
+        <div onClick={() => onTitleClick(title)} className="drop__header">
           <div className="drop__header__title">
             <p className="drop__header__title--bold">{title}</p>
           </div>
           <div className="drop__header__action">
-            <p>{open ? '-' : '+'}</p>
+            <p>{status ? '-' : '+'}</p>
           </div>
         </div>
-        {open && select.length > 0 && (
+        {status && select.length > 0 && (
           <div className="drop__container">
             <ul>
               {select &&
@@ -65,9 +66,9 @@ const DropDown = React.memo(function DropDown({ items, title, multiSelect }) {
           </div>
         )}
         <div className="drop__list">
-          {open && (
+          {status && (
             <ul>
-              {items.map((item) => (
+              {items.map((item: { id: string | number; name: string }) => (
                 <li key={item.name}>
                   <span>{item.name}</span>
                   <div className="checkbox">

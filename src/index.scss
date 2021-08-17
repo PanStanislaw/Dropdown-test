@@ -15,7 +15,7 @@ code {
 .App{
   display: flex;
   justify-content: center;
-  .div {
-    margin: 20px;
+  li{
+    list-style: none;
   }
 }
