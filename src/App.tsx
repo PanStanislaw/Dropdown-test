@@ -84,9 +84,9 @@ const data = [
 ];
 
 function App() {
-  const [status, setStatus] = React.useState(null);
+  const [status, setStatus] = React.useState<string | null>(null);
 
-  const hendleClick = (el) => {
+  const hendleClick = (el: any) => {
     console.log(el.title);
     setStatus(status === el.title ? null : el.title);
   };
@@ -94,17 +94,26 @@ function App() {
   return (
     <div className="App">
       <ul>
-        {data.map((el) => (
-          <li key={el.title + el.id}>
-            <DropDown
-              items={el.arr}
-              title={el.title}
-              multiSelect={el.multiSelect}
-              status={status === el.title}
-              onTitleClick={() => hendleClick(el)}
-            />
-          </li>
-        ))}
+        {data.map(
+          (
+            el: {
+              title: string;
+              multiSelect: boolean;
+              arr: ({ id: string; name: string } | { id: number; name: string })[];
+            },
+            index: number,
+          ) => (
+            <li key={el.title}>
+              <DropDown
+                items={el.arr}
+                title={el.title}
+                multiSelect={el.multiSelect}
+                status={status === el.title}
+                onTitleClick={() => hendleClick(el)}
+              />
+            </li>
+          ),
+        )}
       </ul>
     </div>
   );

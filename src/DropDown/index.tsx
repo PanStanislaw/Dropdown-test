@@ -2,12 +2,11 @@ import React from 'react';
 import './DropDown.scss';
 
 export interface Props {
-  items: [];
+  items: ({ id: string; name: string; } | { id: number; name: string; })[];
   title: string;
   multiSelect: boolean;
-  status: string;
+  status: boolean;
   onTitleClick: any;
-  children: React.ReactNode;
 }
 
 const DropDown = React.memo(function DropDown({
@@ -68,7 +67,7 @@ const DropDown = React.memo(function DropDown({
         <div className="drop__list">
           {status && (
             <ul>
-              {items.map((item: { id: string | number; name: string }) => (
+              {items.map((item: any) => (           
                 <li key={item.name}>
                   <span>{item.name}</span>
                   <div className="checkbox">
