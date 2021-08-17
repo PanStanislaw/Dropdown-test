@@ -103,7 +103,7 @@ function App() {
             },
             index: number,
           ) => (
-            <li key={el.title}>
+            <li key={el.title + index}>
               <DropDown
                 items={el.arr}
                 title={el.title}
