@@ -2,11 +2,12 @@ import React from 'react';
 import './DropDown.scss';
 
 export interface Props {
-  items: ({ id: string; name: string; } | { id: number; name: string; })[];
+  items: ({ id: string; name: string; } | { id: number; name: string;})[];
   title: string;
   multiSelect: boolean;
   status: boolean;
   onTitleClick: any;
+  index:number
 }
 
 const DropDown = React.memo(function DropDown({
@@ -15,8 +16,10 @@ const DropDown = React.memo(function DropDown({
   multiSelect,
   status,
   onTitleClick,
+  index,
 }: Props) {
   const [select, setSelect] = React.useState<string[]>([]);
+  
 
   const onSelectCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name: string = e.target.name;
@@ -41,7 +44,7 @@ const DropDown = React.memo(function DropDown({
   return (
     <div className="container">
       <div className={`wrapper ${title}`}>
-        <div onClick={() => onTitleClick(title)} className="drop__header">
+        <div onClick={() => onTitleClick(index)} className="drop__header">
           <div className="drop__header__title">
             <p className="drop__header__title--bold">{title}</p>
           </div>
